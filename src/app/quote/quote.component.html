@@ -1,1 +1,64 @@
-<p>quote works!</p>
+<div class="container" id="thee">
+    <div class="jumbotron">
+        <p>Life Quotes!</p>
+        <h6>quotes application</h6>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4" id="one">
+                <div class="row" id="lol">
+                    <h3>create new Quotes</h3>
+                </div>
+                <hr>
+
+                <app-quote-form (addQuote)='addNewQuote($event)'></app-quote-form>
+
+            </div>
+            <div class="col-8" id="two">
+                <div class="row" id="lol">
+                    <h3>Notable Quotes</h3>
+                </div>
+
+                <div class="row">
+                    <div class="card" id="crd" *ngFor='let quote of quotes;let i = index'>
+
+                        <div class="card-title">
+                            <h5 font color="yellow" *ngIf="showDescription">{{quote.name}}</h5>
+                        </div>
+
+                        <button type="button" (click)="toggleQuote()" class="btn btn-primary">{{showDescription? "Hide":
+                            "Show"}} Quote Details</button>
+
+                        <div class="card-body" id="ppp">
+                            <p id="{{i}}" appHighlight>{{quote.description}}</p>
+                        </div>
+                        <div class="card-footer" id="hut" *ngIf="showDescription">
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>
+                                        <app-vote></app-vote>
+                                    </p>
+
+                                </div>
+                                <div class="col-6" id="small">
+                                    <p>Submitted by {{quote.submitter}}, {{quote.completeDate|dateCount}} days ago</p>
+
+                                </div>
+                                <div class="col-2">
+
+                                    <app-quote-details [quote]='quote' (isComplete)='deleteQuote($event,i)'>
+                                    </app-quote-details>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
